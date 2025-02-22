@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: procurement
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: myGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.stringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.stringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.stringSerializer
+      value-serializer: org.apache.kafka.common.serialization.stringSerializer
