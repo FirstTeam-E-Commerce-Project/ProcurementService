@@ -2,7 +2,9 @@ package com.example.procurement.Service;
 
 import com.example.procurement.dto.PlaceOrderDTO;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProducerService {
     private final KafkaTemplate<String, PlaceOrderDTO> kafkaTemplate;
 
@@ -10,7 +12,7 @@ public class ProducerService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(PlaceOrderDTO placeOrderDTO) {
-        kafkaTemplate.send("restocking", placeOrderDTO);
+    public void sendEvent(PlaceOrderDTO placeOrderDTO) {
+        kafkaTemplate.send("re-stocking", placeOrderDTO);
     }
 }

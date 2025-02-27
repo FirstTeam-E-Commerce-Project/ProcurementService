@@ -4,9 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 public class Suppliers {
@@ -16,13 +13,20 @@ public class Suppliers {
     private String supplierName;
     private String email;
     private String phoneNumber;
-    private String address;
+    private Double pricePerUnit;
 
-    public Suppliers() {
-    }
+    public Suppliers() {}
 
     public Integer getId() {
         return id;
+    }
+
+    public Double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(Double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 
     public void setId(Integer id) {
@@ -53,19 +57,11 @@ public class Suppliers {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Suppliers(Integer id, String supplierName, String email, String phoneNumber, String address) {
+    public Suppliers(Integer id, String supplierName, String email, String phoneNumber, Double pricePerUnit) {
         this.id = id;
         this.supplierName = supplierName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.pricePerUnit = pricePerUnit;
     }
 }

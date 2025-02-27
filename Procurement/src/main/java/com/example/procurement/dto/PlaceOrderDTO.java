@@ -4,25 +4,17 @@ import java.util.Date;
 
 public class PlaceOrderDTO {
     private String productId;
-    private String supplierId;
     private Double totalAmount;
     private Integer quantityOrdered;
     private Date deliveryDate;
 
+    public PlaceOrderDTO(){}
     public String getProductId() {
         return productId;
     }
 
     public void setProductId(String productId) {
         this.productId = productId;
-    }
-
-    public String getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
     }
 
     public Double getTotalAmount() {
@@ -49,9 +41,8 @@ public class PlaceOrderDTO {
         this.deliveryDate = deliveryDate;
     }
 
-    public PlaceOrderDTO(String productId, String supplierId, Double totalAmount, Integer quantityOrdered, Date deliveryDate) {
+    public PlaceOrderDTO(String productId, Double totalAmount, Integer quantityOrdered, Date deliveryDate) {
         this.productId = productId;
-        this.supplierId = supplierId;
         this.totalAmount = totalAmount;
         this.quantityOrdered = quantityOrdered;
         this.deliveryDate = deliveryDate;
