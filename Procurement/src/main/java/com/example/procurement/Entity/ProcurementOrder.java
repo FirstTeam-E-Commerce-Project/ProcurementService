@@ -18,7 +18,20 @@ public class ProcurementOrder{
     @JoinColumn(name = "suppliers_id")
     private Suppliers suppliers;
 
+    //default constructor
     public ProcurementOrder() {}
+
+    //all args constructor
+    public ProcurementOrder(Integer id, String productId, Integer quantity, Double totalAmount, Date orderDate, Date deliveryDate, Suppliers suppliers) {
+        this.id = id;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.totalAmount = totalAmount;
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.suppliers = suppliers;
+    }
+    //getters and setters
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
     public String getProductId() {return productId;}
@@ -34,13 +47,4 @@ public class ProcurementOrder{
     public Suppliers getSuppliers() {return suppliers;}
     public void setSuppliers(Suppliers suppliers) {this.suppliers = suppliers;}
 
-    public ProcurementOrder(Integer id, String productId, Integer quantity, Double totalAmount, Date orderDate, Date deliveryDate, Suppliers suppliers) {
-        this.id = id;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.totalAmount = totalAmount;
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
-        this.suppliers = suppliers;
-    }
 }

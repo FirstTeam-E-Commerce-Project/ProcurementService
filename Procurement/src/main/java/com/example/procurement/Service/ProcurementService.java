@@ -49,7 +49,8 @@ public class ProcurementService {
         procurementOrder.setDeliveryDate(new Date(System.currentTimeMillis() + 2L * 24 * 60 * 60 * 1000));  //considering order will be delivered after two days
         procurementOrderRepo.save(procurementOrder);
         PlaceOrderDTO dto = mapToDTO(procurementOrder);      //using mapping methods for data transfer
-        producerService.sendEvent(dto);                     //sending kafka event
+                                                            //sending kafka event
+        producerService.sendEvent(dto);                       //sendEvent is coming from ProducerService
         return dto;
     }
 
