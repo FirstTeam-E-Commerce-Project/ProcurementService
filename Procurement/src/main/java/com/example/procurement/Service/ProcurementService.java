@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 @Service
@@ -19,7 +20,7 @@ public class ProcurementService {
     private final SupplierRepo supplierRepo;
     private final ProcurementOrderRepo procurementOrderRepo;
     private final ProducerService producerService;
-    private final Random random = new Random();
+    private final Random random = new Random();                         //creating and object of random class to select random supplier
 
     public ProcurementService(SupplierRepo supplierRepo, ProcurementOrderRepo procurementOrderRepo, ProducerService producerService) {
         this.supplierRepo = supplierRepo;
@@ -28,13 +29,14 @@ public class ProcurementService {
     }
 
     // the supplier will be randomly selected
-    private Suppliers selectSupplier() {
+        private Suppliers selectSupplier() {
         List<Suppliers> suppliersList = supplierRepo.findAll();
         return suppliersList.get(random.nextInt(suppliersList.size()));
     }
 
-    @Transactional
+    @Transactional()
     public PlaceOrderDTO placeOrder(LowStockDTO lowStockDTO) {
+        //creating and storing order
         Suppliers supplier = selectSupplier();
         int quantity = 100;    //setting quantity to 100
         double totalAmount = quantity * supplier.getPricePerUnit();
@@ -46,7 +48,9 @@ public class ProcurementService {
         procurementOrder.setSuppliers(supplier);
         procurementOrder.setDeliveryDate(new Date(System.currentTimeMillis() + 2L * 24 * 60 * 60 * 1000));  //considering order will be delivered after two days
         procurementOrderRepo.save(procurementOrder);
-        return mapToDTO(procurementOrder);
+        PlaceOrderDTO dto = mapToDTO(procurementOrder);      //using mapping methods for data transfer
+        producerService.sendEvent(dto);                     //sending kafka event
+        return dto;
     }
 
     //mapping DTO to Entity
@@ -58,4 +62,8 @@ public class ProcurementService {
         placeOrderDTO.setDeliveryDate(procurementOrder.getDeliveryDate());
         return placeOrderDTO;
     }
+    public List<ProcurementOrder> getAllOrder(){
+        return procurementOrderRepo.findAll();
+    }
+    //public P
 }
